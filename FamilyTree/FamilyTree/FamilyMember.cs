@@ -72,11 +72,7 @@ public class FamilyMember
         return $"Name = {_name} Пол = {_gender} Birthday = {_birthday.ToLongDateString()}";
     }
 
-     string PrintInfo()
-    {
-        return $"{this.ToString()}";
-    }
-     
+
 
     public string PrintParents()
     {
