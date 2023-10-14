@@ -22,7 +22,7 @@ public class FamilyMember
         this._name = name;
         this._gender = gender;
         this._birthday = birthday;
-        this._childrenList = new List<FamilyMember>();
+        this._childrenList = new List<FamilyMember>();//для будущего вывода целого древа
     }
 
     #region Свойства_полей
