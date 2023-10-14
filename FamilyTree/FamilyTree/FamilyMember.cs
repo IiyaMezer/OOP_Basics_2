@@ -13,7 +13,7 @@ public class FamilyMember
     private FamilyMember _father;
     private FamilyMember _mother;
     private Gender _gender;
-    private List<FamilyMember> _members;
+    private List<FamilyMember> _childrenList;
     private FamilyMember _wife;
     private FamilyMember _husband;
 
@@ -22,7 +22,7 @@ public class FamilyMember
         this._name = name;
         this._gender = gender;
         this._birthday = birthday;
-        this._members = new List<FamilyMember>();
+        this._childrenList = new List<FamilyMember>();
     }
 
     #region Свойства_полей
@@ -72,14 +72,27 @@ public class FamilyMember
         return $"Name = {_name} Пол = {_gender} Birthday = {_birthday.ToLongDateString()}";
     }
 
-    string PrintInfo()
+     string PrintInfo()
     {
-        return $"{this}";
+        return $"{this.ToString()}";
+    }
+     
+
+    public string PrintParents()
+    {
+        return $"Родители {_name}: " +
+               $"Father = {_father?.Name} \n" +
+               $"Moter = {_mother?.Name}";
     }
 
-    string PrintParents()
+    public string PrintCloseRelative()
     {
-        return $"Father = {_father} \n" +
-               $"Moter = {_mother}";
+        if (this._gender == Gender.Female)
+            return $"{this.Name} 's husband is {this.Husband?.Name}";
+        else
+        {
+            return $"{this.Name} 's wife is {this.Wife?.Name}";
+        }
     }
+
 }
