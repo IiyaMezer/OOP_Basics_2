@@ -19,10 +19,10 @@ public class FamilyMember
 
     public FamilyMember(string name, DateTime birthday, Gender gender)
     {
-        Name = name;
-        this.Gender1 = gender;
-        Birthday = birthday;
-        _members = new List<FamilyMember>();
+        this._name = name;
+        this._gender = gender;
+        this._birthday = birthday;
+        this._members = new List<FamilyMember>();
     }
 
     #region Свойства_полей
@@ -69,7 +69,7 @@ public class FamilyMember
 
     public override string ToString()
     {
-        return $"Name = {_name} Пол = {_gender} Birthday = {_birthday}";
+        return $"Name = {_name} Пол = {_gender} Birthday = {_birthday.ToLongDateString()}";
     }
 
     string PrintInfo()
