@@ -8,7 +8,6 @@ namespace FamilyTree;
 
     public class FamilyMember
     {
-
         private string _name;
         private DateTime _birthday;
         private FamilyMember _father;
@@ -16,18 +15,53 @@ namespace FamilyTree;
         private Gender _gender;
         private List<FamilyMember> _members;
 
+        
+
+
+
         public FamilyMember(string name, DateTime birthday,Gender gender)
         {
-            this._name = name;
-            this._gender = gender;
-            _birthday = birthday;
+            this.Name = name;
+            this.Gender1 = gender;
+            Birthday = birthday;
             _members = new List<FamilyMember>();
         }
 
-        public override string ToString()
+    #region Свойства_полей
+    public string Name
+    {
+        get => _name;
+        set => _name = value;
+    }
+
+    public DateTime Birthday
+    {
+        get => _birthday;
+    }
+
+    public FamilyMember Father
+    {
+        get => _father;
+        set => _father = value;
+    }
+
+    public FamilyMember Mother
+    {
+        get => _mother;
+        set => _mother = value;
+    }
+
+    public Gender Gender
+    {
+        get => _gender;
+        set => _gender = value;
+    }
+    #endregion
+
+    public override string ToString()
         {
-            return $"Имя = {_name}" +
-                   $" \n Пол = {_gender}\n" +
+            return $"Имя = {Name}" +
+                   $" \n Пол = {Gender1}\n" +
                    $"Дата рождения = {_birthday}";
         }
     }
