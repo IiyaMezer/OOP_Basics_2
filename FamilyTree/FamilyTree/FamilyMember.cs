@@ -6,60 +6,45 @@ using System.Threading.Tasks;
 
 namespace FamilyTree;
 
-public class FamilyMember
+public class FamilyMember: Person
 {
-    private string _name;
-    private DateTime _birthday;
-    private FamilyMember _father;
-    private FamilyMember _mother;
-    private Gender _gender;
+    private FamilyMember? _father;
+    private FamilyMember? _mother;
     private List<FamilyMember> _childrenList;
-    private FamilyMember _wife;
-    private FamilyMember _husband;
+    private FamilyMember? _wife;
+    private FamilyMember? _husband;
 
-    public FamilyMember(string name, DateTime birthday, Gender gender)
+    public FamilyMember(string name, DateTime birthday, Gender gender): base(name, birthday, gender)
     {
         this._name = name;
         this._gender = gender;
         this._birthday = birthday;
-        this._childrenList = new List<FamilyMember>();//для будущего вывода целого древа
+        _childrenList = new List<FamilyMember>();//для будущего вывода целого древа
     }
 
     #region Свойства_полей
 
-    public string Name
-    {
-        get => _name;
-        set => _name = value;
-    }
+    
 
-    public DateTime Birthday => _birthday;
-
-    public FamilyMember Father
+    public FamilyMember? Father
     {
         get => _father;
         set => _father = value;
     }
 
-    public FamilyMember Mother
+    public FamilyMember? Mother
     {
         get => _mother;
         set => _mother = value;
     }
 
-    public Gender Gender
-    {
-        get => _gender;
-        set => _gender = value;
-    }
-
-    public FamilyMember Wife
+    public FamilyMember? Wife
     {
         get => _wife;
         set => _wife = value;
     }
 
-    public FamilyMember Husband
+    public FamilyMember? Husband
     {
         get => _husband;
         set => _husband = value;
@@ -76,7 +61,7 @@ public class FamilyMember
 
     public string GetParents()
     {
-        return $"Родители {_name}: " +
+        return $"Родители {_name}:\n " +
                $"Father = {_father?.Name} \n" +
                $"Moter = {_mother?.Name}";
     }
