@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FamilyTree
-{
+namespace FamilyTree;
+
     public class Person
     {
         internal string _name;
@@ -34,4 +34,4 @@ namespace FamilyTree
         }
 
     }
-}
+
