@@ -56,16 +56,30 @@ public class FamilyMember: Person
     {
         return $"Name = {_name} Пол = {_gender} Birthday = {_birthday.ToLongDateString()}";
     }
-
-
-
+    /// <summary>
+    /// Получение родителей
+    /// </summary>
+    /// <returns>Имена родителей</returns>
     public string GetParents()
     {
         return $"Родители {_name}:\n " +
                $"Father = {_father?.Name} \n" +
                $"Moter = {_mother?.Name}";
     }
-
+    /// <summary>
+    /// Дедушки
+    /// </summary>
+    /// <returns>Имена дедушек по материнской и отцовской линии</returns>
+    public string GetGrandpas() 
+    {
+        return $"Родители родителей {_name}:\n " +
+               $"Father's line = {_father?._father?.Name} \n" +
+               $"Moter's line = {_mother?._father?.Name}";
+    }
+    /// <summary>
+    /// Возвращает имя супруга
+    /// </summary>
+    /// <returns>Имя супруга</returns>
     public string GetCloseRelative()
     {
         if (this._gender == Gender.Female)
