@@ -45,10 +45,18 @@ internal class Program
 
         rus.Father = ilya;
         rus.Mother = ira;
+
+
         Console.WriteLine(olga);
+        Console.WriteLine();
         Console.WriteLine(victor.GetParents());
+        Console.WriteLine();
         Console.WriteLine(ilya.GetCloseRelative());
+        Console.WriteLine();
         Console.WriteLine(toma.GetCloseRelative());
+        Console.WriteLine();
+        Console.WriteLine(olga.GetGrandpas());
+
 
     }
 }

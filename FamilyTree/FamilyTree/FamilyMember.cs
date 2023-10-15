@@ -72,7 +72,7 @@ public class FamilyMember: Person
     /// <returns>Имена дедушек по материнской и отцовской линии</returns>
     public string GetGrandpas() 
     {
-        return $"Родители родителей {_name}:\n " +
+        return $"{_name}'s grandpa's:\n " +
                $"Father's line = {_father?._father?.Name} \n" +
                $"Moter's line = {_mother?._father?.Name}";
     }
