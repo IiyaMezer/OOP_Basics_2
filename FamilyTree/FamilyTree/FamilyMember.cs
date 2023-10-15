@@ -74,14 +74,14 @@ public class FamilyMember
 
 
 
-    public string PrintParents()
+    public string GetParents()
     {
         return $"Родители {_name}: " +
                $"Father = {_father?.Name} \n" +
                $"Moter = {_mother?.Name}";
     }
 
-    public string PrintCloseRelative()
+    public string GetCloseRelative()
     {
         if (this._gender == Gender.Female)
             return $"{this.Name} 's husband is {this.Husband?.Name}";

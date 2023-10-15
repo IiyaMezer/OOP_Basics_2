@@ -45,9 +45,9 @@ internal class Program
 
         rus.Father = ilya;
         rus.Mother = ira;
-        Console.WriteLine(victor.PrintParents());
-        Console.WriteLine(ilya.PrintCloseRelative());
-        Console.WriteLine(toma.PrintCloseRelative());
+        Console.WriteLine(victor.GetParents());
+        Console.WriteLine(ilya.GetCloseRelative());
+        Console.WriteLine(toma.GetCloseRelative());
 
     }
 }
