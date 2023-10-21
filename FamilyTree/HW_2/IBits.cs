@@ -2,6 +2,6 @@
 
 public interface IBits
 {
-    public bool GenBit(int i);
+    public bool GetBit(int i);
     public void SetBit(int i, bool bit);
 }

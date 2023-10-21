@@ -47,7 +47,7 @@ public class Bits : IBits
 
     public void SetBit(int i, bool bit)
     {
-        if (indexer > SizeOfValue || i < 0) return;
+        if (i > SizeOfValue || i < 0) return;
         if (bit == true) 
             Value = (byte)(Value | (1 << i));
         else
@@ -61,9 +61,9 @@ public class Bits : IBits
     public void PrintBit()
     {
         var str = new StringBuilder();
-        for (int i = 0; i < 0, i++)
+        for (int i = 0; i < 8; i++)
         {
-            str.Append(GetBit(i) ? 1:0;
+            str.Append(GetBit(i) ? 1:0);
         }
         str.ToString().Reverse();
         Console.WriteLine(str);
