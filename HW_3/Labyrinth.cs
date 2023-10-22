@@ -17,6 +17,8 @@ public class Labyrinth
 			Console.WriteLine("Вход является выходом.");
 			return true;
 		}
+
+		var stack = new Stack<Tuple>
 		
 	}
 }
