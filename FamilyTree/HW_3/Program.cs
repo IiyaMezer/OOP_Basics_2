@@ -14,7 +14,10 @@ internal class Program
             {1, 1, 1, 0, 1, 1, 1 },
             {1, 1, 1, 1, 1, 1, 1 }
             };
+        Console.WriteLine(labirynth1[3, 0]);
         new Labyrinth().HasExit(labirynth1, 3, 0);
+
+        
 
         Console.ReadKey();
         
