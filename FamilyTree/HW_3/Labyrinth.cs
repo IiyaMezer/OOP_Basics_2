@@ -44,6 +44,8 @@ public class Labyrinth
             }
             l[temp.Item1, temp.Item2] = 1;
 
+            //TODO  разобратьлся с Out of bounds 
+
             if (temp.Item2 >= 0 && l[temp.Item1, temp.Item2 - 1] != 1)
                 stack.Push(new(temp.Item1, temp.Item2 - 1)); //up
 
