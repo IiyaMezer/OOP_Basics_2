@@ -31,10 +31,12 @@ public class Labyrinth
         }
 
        if (ExitSearch(l, startI, startJ)== true){
-        Concole.WriteLine("Found!");
+        Console.WriteLine("Found!");
+        return ExitSearch(l, startI, startJ);
        }
        else {
         Console.WriteLine("There is no escape!");
+        return ExitSearch(l, startI, startJ);
        }      
 
         
@@ -74,6 +76,7 @@ public class Labyrinth
             if (temp.Item1 + 1 < l.GetLength(0) && l[temp.Item1 + 1, temp.Item2] != 1)
                 stack.Push(new(temp.Item1 + 1, temp.Item2)); //rigth
         }
+        return false;
 
 
     }
@@ -87,8 +90,5 @@ public class Labyrinth
     /// <param name="startI">стартовая строка</param>
     /// <param name="startJ">стартовый столбец</param>
     /// /// <returns>кол-в выходов</returns>
-    public int ExitNums(int[,] l, int startI, int startJ)
-    {
 
-    }
 }
