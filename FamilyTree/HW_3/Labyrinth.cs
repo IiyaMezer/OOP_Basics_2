@@ -16,28 +16,28 @@ public class Labyrinth
     /// <param name="startI">стартовая строка</param>
     /// <param name="startJ">стартовый столбец</param>
     /// <returns>true/false</returns>
-    public bool HasExit(int[,] l, int startI, int startJ)
-    {
-        if (l[startI, startJ] == 1)
-        {
-            Console.WriteLine("Вы попали в стену.");
-            return false;
-        }
-        else if (l[startI, startJ] == 2)
-        {
-
-            Console.WriteLine("Вход является выходом.");
-            return true;
-        }
-
-       if (ExitSearch(l, startI, startJ)== true){
-        Console.WriteLine("Found!");
-        return ExitSearch(l, startI, startJ);
-       }
-       else {
-        Console.WriteLine("There is no escape!");
-        return ExitSearch(l, startI, startJ);
-       }      
+    //public bool HasExit(int[,] l, int startI, int startJ)
+    //{
+    //    if (l[startI, startJ] == 1)
+    //    {
+    //        Console.WriteLine("Вы попали в стену.");
+    //        return false;
+    //    }
+    //    else if (l[startI, startJ] == 2)
+    //    {
+    //
+    //        Console.WriteLine("Вход является выходом.");
+    //        return true;
+    //    }
+    //
+    //   if (ExitSearch(l, startI, startJ)== true){
+    //    Console.WriteLine("Found!");
+    //    return true;
+    //   }
+    //   else {
+    //    Console.WriteLine("There is no escape!");
+    //    return false;
+    //   }      
 
         
     }
@@ -70,6 +70,7 @@ public class Labyrinth
 
             if (temp.Item2 + 1 < l.GetLength(1) && l[temp.Item1, temp.Item2 + 1] != 1)
                 stack.Push(new(temp.Item1, temp.Item2 + 1)); //down
+
             if (temp.Item1 > 0 && l[temp.Item1 - 1, temp.Item2] != 1)
                 stack.Push(new(temp.Item1 - 1, temp.Item2)); //left
 
@@ -80,15 +81,61 @@ public class Labyrinth
 
 
     }
-    
-    
-    
     /// <summary>
-    /// Количество возможных выходов
+    /// Кол-во выходов
     /// </summary>
-    /// <param name="l"></param>
+    /// <param name="l">исследуемый лабиринт</param>
     /// <param name="startI">стартовая строка</param>
     /// <param name="startJ">стартовый столбец</param>
-    /// /// <returns>кол-в выходов</returns>
+    /// <returns>кол-во выходов</returns>
+    public int HasExit(int[,] l, int startI, int startJ)
+    {
+         int exitCounter = 0;
+        
+        if (l[startI, startJ] == 1)
+        {
+            Console.WriteLine("Вы попали в стену.");
+            return 0;
+        }
+        else if (l[startI, startJ] == 2)
+        {
+
+            Console.WriteLine("Вход является выходом.");
+            return 1;
+        }
+
+
+        var stack = new Stack<Tuple<int, int>>();
+        stack.Push(new(startI, startJ));
+
+        while (stack.Count > 0)
+        {
+            var temp = stack.Pop();
+
+            if (l[temp.Item1, temp.Item2] == 2)
+            {
+                exitCounter++;
+            }
+
+            l[temp.Item1, temp.Item2] = 1;
+
+
+            if (temp.Item2 > 0 && l[temp.Item1, temp.Item2 - 1] != 1)
+                stack.Push(new(temp.Item1, temp.Item2 - 1)); //up
+
+            if (temp.Item2 + 1 < l.GetLength(1) && l[temp.Item1, temp.Item2 + 1] != 1)
+                stack.Push(new(temp.Item1, temp.Item2 + 1)); //down
+
+            if (temp.Item1 > 0 && l[temp.Item1 - 1, temp.Item2] != 1)
+                stack.Push(new(temp.Item1 - 1, temp.Item2)); //left
+
+            if (temp.Item1 + 1 < l.GetLength(0) && l[temp.Item1 + 1, temp.Item2] != 1)
+                stack.Push(new(temp.Item1 + 1, temp.Item2)); // право
+        }
+        return exitCounter;
+    }
+    
+    
+    
 
 }

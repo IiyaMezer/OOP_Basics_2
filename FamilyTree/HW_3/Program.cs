@@ -15,7 +15,8 @@ internal class Program
             {1, 1, 1, 2, 1, 1, 1 }
             };
         
-        new Labyrinth().HasExit(labirynth1, 0, 1);
+       
+        Console.WriteLine(new Labyrinth().HasExit(labirynth1, 0, 1));
 
         
 
