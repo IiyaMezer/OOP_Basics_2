@@ -46,13 +46,13 @@ public class Labyrinth
 
             //TODO  разобраться с Out of bounds 
 
-            if (temp.Item2 >= 0 && l[temp.Item1, temp.Item2 - 1] != 1)
+            if (temp.Item2 > 0 && l[temp.Item1, temp.Item2 - 1] != 1)
                 stack.Push(new(temp.Item1, temp.Item2 - 1)); //up
 
             if (temp.Item2 + 1 < l.GetLength(1) && l[temp.Item1, temp.Item2 + 1] != 1)
                 stack.Push(new(temp.Item1, temp.Item2 + 1)); //down
             //TODO  разобраться с Out of bounds 
-            if (temp.Item1 >= 0 && l[temp.Item1 - 1, temp.Item2] != 1)
+            if (temp.Item1 > 0 && l[temp.Item1 - 1, temp.Item2] != 1)
                 stack.Push(new(temp.Item1 - 1, temp.Item2)); //left
 
             if (temp.Item1 + 1 < l.GetLength(0) && l[temp.Item1 + 1, temp.Item2] != 1)
