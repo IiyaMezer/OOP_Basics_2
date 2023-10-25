@@ -30,6 +30,24 @@ public class Labyrinth
             return true;
         }
 
+       if (ExitSearch(l, startI, startJ)== true){
+        Concole.WriteLine("Found!");
+       }
+       else {
+        Console.WriteLine("There is no escape!");
+       }      
+
+        
+    }
+/// <summary>
+/// Поиск выхода
+/// </summary>
+/// <param name="l">исследуемый лабиринт</param>
+/// <param name="startI">стартовая строка</param>
+/// <param name="startJ">стартовый столбец</param>
+/// <returns>true/false</returns>
+    private bool ExitSearch(int[,] l, int startI, int startJ)
+    { 
         var stack = new Stack<Tuple<int, int>>();
         stack.Push(new(startI, startJ));
 
@@ -38,20 +56,18 @@ public class Labyrinth
             var temp = stack.Pop();
 
             if (l[temp.Item1, temp.Item2] == 2)
-            {
-                Console.WriteLine("Found!");
+            {                
                 return true;
             }
+            
             l[temp.Item1, temp.Item2] = 1;
 
-            //TODO  разобраться с Out of bounds 
 
             if (temp.Item2 > 0 && l[temp.Item1, temp.Item2 - 1] != 1)
                 stack.Push(new(temp.Item1, temp.Item2 - 1)); //up
 
             if (temp.Item2 + 1 < l.GetLength(1) && l[temp.Item1, temp.Item2 + 1] != 1)
                 stack.Push(new(temp.Item1, temp.Item2 + 1)); //down
-            //TODO  разобраться с Out of bounds 
             if (temp.Item1 > 0 && l[temp.Item1 - 1, temp.Item2] != 1)
                 stack.Push(new(temp.Item1 - 1, temp.Item2)); //left
 
@@ -59,6 +75,20 @@ public class Labyrinth
                 stack.Push(new(temp.Item1 + 1, temp.Item2)); //rigth
         }
 
-        return false;
+
+    }
+    
+    
+    
+    /// <summary>
+    /// Количество возможных выходов
+    /// </summary>
+    /// <param name="l"></param>
+    /// <param name="startI">стартовая строка</param>
+    /// <param name="startJ">стартовый столбец</param>
+    /// /// <returns>кол-в выходов</returns>
+    public int ExitNums(int[,] l, int startI, int startJ)
+    {
+
     }
 }
