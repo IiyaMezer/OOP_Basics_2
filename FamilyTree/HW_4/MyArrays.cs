@@ -30,33 +30,29 @@ public class MyArrays
         return randomArray;
 
     }
-
+    /// <summary>
+    /// Поиск трех элементов массиве, сумма которых равна заданному числу
+    /// </summary>
+    /// <param name="target">искомая сумма</param>
+    /// <param name="nums">исходный массив</param>
+    /// <returns>список из стрех искомых чисел</returns>
     public static List<int> FindNumsOfTargetSum(int target, List<int> nums)
     {
         List<int> result = new List<int>();
         
         var request = from num1 in nums
-
                       from num2 in nums
-
                       from num3 in nums
-
-                      where num1 != num2 && num1 != num3 && num2 != num3 && num1 + num2 + num3 == target
-
-                       select new { Num1 = num1, Num2 = num2, Num3 = num3 };
+                      where num1 + num2 + num3 == target
+                      select new { Num1 = num1, Num2 = num2, Num3 = num3 };
 
         if (request.Any())
         {
             foreach (var numbers in request)
-
             {
-
                 result.Add(numbers.Num1);
-
                 result.Add(numbers.Num2);
-
                 result.Add(numbers.Num3);
-
             }
         }
         return result;
