@@ -26,6 +26,7 @@ public class MyArrays
         {
             int number = random.Next(minValue, maxValue + 1);
             randomArray.Add(number);
+            System.Threading.Thread.Sleep(50);
         }
         return randomArray;
 
