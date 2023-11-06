@@ -11,6 +11,11 @@ internal class Program
         calc.Sub(1);
         calc.Div(5);
         calc.Mult(10);
+        calc.CanselLast();
+        calc.CanselLast();
+        calc.CanselLast();
+        calc.CanselLast();        
+
 
     }
 

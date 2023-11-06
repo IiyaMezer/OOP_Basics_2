@@ -10,10 +10,11 @@ namespace HW_5
     {
 
         double Result { get; set; }
-        double Sum(int x);
-        double Sub(int x);
-        double Div(int x);
-        double Mult(int x);
+        void Sum(int x);
+        void Sub(int x);
+        void Div(int x);
+        void Mult(int x);
+        void CanselLast();
 
         event EventHandler<EventArgs> MyEventHandler;
 

@@ -9,43 +9,55 @@ namespace HW_5
     internal class Calc : ICalc
     {
         public double Result { get; set; }
+        private Stack<double> LastResult {  get; set; } = new Stack<double>();
 
         public event EventHandler<EventArgs> MyEventHandler;
+
 
         private void PrintResult()
         {
             MyEventHandler?.Invoke(this, new EventArgs());
         }
 
-        public double Div(int x)
+        public void Div(int x)
         {
             Result /= x;
             PrintResult();
-            return Result ;
+           
         }
 
-        public double Mult(int x)
+        public void Mult(int x)
         {
             Result *= x;
             PrintResult();
-
-            return Result;
+            LastResult.Push(Result);
         }
 
-        public double Sub(int x)
+        public void Sub(int x)
         {
             Result -= x;
             PrintResult();
-
-            return Result ;
+            LastResult.Push(Result);
         }
 
-        public double Sum(int x)
+        public void Sum(int x)
         {
             Result += x;
             PrintResult();
+            LastResult.Push(Result);
+        }
 
-            return Result;
+        public void CanselLast()
+        {
+            if (LastResult.TryPop(out double res))
+            {
+                Result = res;
+                PrintResult() ;
+            }
+            else
+            {
+                Console.WriteLine("нельзя отменить последнее действие.");
+            }
         }
     }
 }
