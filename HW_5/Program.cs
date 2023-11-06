@@ -5,17 +5,6 @@ internal class Program
     static void Main(string[] args)
     {
         var calc = new Calc();
-        calc.Result = 0D;
-        calc.MyEventHandler += Calc_MyEventHandler;
-        calc.Sum(10);
-        calc.Sub(1);
-        calc.Div(5);
-        calc.Mult(10);
-        calc.CanselLast();
-        calc.CanselLast();
-        calc.CanselLast();
-        calc.CanselLast();        
-
 
     }
 
