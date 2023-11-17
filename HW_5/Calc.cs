@@ -80,12 +80,22 @@ namespace HW_5
         public double DataInput()
         {
             Console.WriteLine("Enter number:");
+
+
             string NumStr = Console.ReadLine()!;
-            if (MyParsing.TryParseDouble(NumStr, out double num)) 
+            try
+            {  
+                if (MyParsing.TryParseDouble(NumStr, out double num)) {}
+                return num;
+            }
+            catch ( NegativeNumberExeption e)
             {
+                Console.WriteLine(e);
+                Console.WriteLine("Введено неверное число");
+                return 0;
             }
             Console.Clear();
-            return num;
+            
         }
         public void ExecuteCommand(double num)
         {
