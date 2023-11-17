@@ -10,7 +10,7 @@ internal class Program
         
         string command = String.Empty;
         string operation = String.Empty;
-        int num = 0;
+        double num = 0;
 
         bool f = true;
         while (f)

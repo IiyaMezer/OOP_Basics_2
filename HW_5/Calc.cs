@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HW_5_6;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -76,15 +77,17 @@ namespace HW_5
                 Console.WriteLine();
             }
         }
-        public int DataInput()
+        public double DataInput()
         {
             Console.WriteLine("Enter number:");
             string NumStr = Console.ReadLine()!;
-            if (int.TryParse(NumStr, out int num)) { }
+            if (MyParsing.TryParseDouble(NumStr, out double num)) 
+            {
+            }
             Console.Clear();
             return num;
         }
-        public void ExecuteCommand(int num)
+        public void ExecuteCommand(double num)
         {
             PrintCommands();
             Console.WriteLine("Выберите операцию: ");
