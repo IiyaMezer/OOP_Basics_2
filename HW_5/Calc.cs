@@ -27,28 +27,28 @@ namespace HW_5
             MyEventHandler?.Invoke(this, new EventArgs());
         }
 
-        public void Div(int x)
+        public void Div(double x)
         {
             Result /= x;
             PrintResult();
            
         }
 
-        public void Mult(int x)
+        public void Mult(double x)
         {
             Result *= x;
             PrintResult();
             LastResult.Push(Result);
         }
 
-        public void Sub(int x)
+        public void Sub(double x)
         {
             Result -= x;
             PrintResult();
             LastResult.Push(Result);
         }
 
-        public void Sum(int x)
+        public void Sum(double x)
         {
             Result += x;
             PrintResult();
