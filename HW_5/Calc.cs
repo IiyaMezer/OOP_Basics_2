@@ -25,12 +25,17 @@ namespace HW_5
 
         private void PrintResult()
         {
+            Console.Write("Result: ");
             MyEventHandler?.Invoke(this, new EventArgs());
         }
 
         public void Div(double x)
         {
             Result /= x;
+            if (Result < 0)
+            {
+                throw new NegativeNumberExeption("Получается отрицательный результат");
+            }
             PrintResult();
            
         }
@@ -45,12 +50,18 @@ namespace HW_5
         public void Sub(double x)
         {
             Result -= x;
+            if(Result < 0)
+            {
+                throw new NegativeNumberExeption("Получается отрицательный результат");
+            }
             PrintResult();
             LastResult.Push(Result);
+
         }
 
         public void Sum(double x)
         {
+
             Result += x;
             PrintResult();
             LastResult.Push(Result);
@@ -83,18 +94,19 @@ namespace HW_5
 
 
             string NumStr = Console.ReadLine()!;
-            try
-            {  
-                if (MyParsing.TryParseDouble(NumStr, out double num)) {}
-                return num;
-            }
-            catch ( NegativeNumberExeption e)
+
+            bool tempBool = MyParsing.TryParseDouble(NumStr, out double num);
+            if (tempBool == true)
             {
-                Console.WriteLine(e);
-                Console.WriteLine("Введено неверное число");
-                return 0;
+                if (num < 0)
+                {
+                    throw new NegativeNumberExeption("Введенное число не может быть отрицательным");
+                    
+                }
+                else return num;
             }
             Console.Clear();
+            return num;
             
         }
         public void ExecuteCommand(double num)
@@ -108,6 +120,7 @@ namespace HW_5
                 switch(command)
                 {
                     case "+":
+
                         Sum(num); break;
                     case "-":
                         Sub(num); break;
@@ -117,6 +130,10 @@ namespace HW_5
                         Div(num); break;
                     case "reverse":
                         CanselLast(); break;
+                    default:
+                        throw new ArgumentException();
+                        Console.WriteLine("Такой команды не существует.");
+                       
                 }
             }
 
