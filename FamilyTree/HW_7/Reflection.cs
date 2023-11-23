@@ -11,14 +11,14 @@ public static class Reflection
 {
     public static string ObjectToString(object obj)
     {
-        StringBuilder sb = new StringBuilder();
+        StringBuilder result = new StringBuilder();
         Type type = obj.GetType();
 
         foreach (FieldInfo fieldInfo in type.GetFields())
 
         {
 
-            MyCustomAttribute attribute = fieldInfo.GetCustomAttribute<MyCustomAttribute>();
+            MyCustomNameAttribute attribute = fieldInfo.GetCustomAttribute<MyCustomNameAttribute>();
 
 
 
@@ -32,9 +32,9 @@ public static class Reflection
 
 
 
-                sb.AppendFormat($"{fieldName}:{fieldValue}");
+                result.AppendFormat($"{fieldName}:{fieldValue}");
 
-                sb.AppendLine();
+                result.AppendLine();
 
             }
 
@@ -42,6 +42,8 @@ public static class Reflection
 
 
 
-        return sb.ToString();
+        return result.ToString();
     }
+
+    public static string StringToObject(object obj) { return null; }
 }
