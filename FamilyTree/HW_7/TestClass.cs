@@ -26,3 +26,5 @@ namespace HW_7
             this.C = c;
 
         }
+    }
+}
