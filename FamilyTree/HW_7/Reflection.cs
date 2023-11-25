@@ -11,10 +11,13 @@ public static class Reflection
 {
     public static string ObjectToString(object obj)
     {
+
         StringBuilder result = new StringBuilder();
         Type type = obj.GetType();
+        var properties = type.GetProperties(System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public);
 
-        foreach (FieldInfo fieldInfo in type.GetFields())
+
+        foreach (var fieldInfo in properties)
 
         {
             MyCustomNameAttribute attribute = fieldInfo.GetCustomAttribute<MyCustomNameAttribute>();
@@ -24,8 +27,18 @@ public static class Reflection
                 string fieldName = attribute.FieldName;
                 object fieldValue = fieldInfo.GetValue(obj);
 
-                result.AppendFormat($"{fieldName}:{fieldValue}");
+                if (fieldInfo.PropertyType == typeof(char[]))
+                {
+                    result.AppendFormat($"{fieldName}:{new String(fieldValue as char[]) + "|"}");
+                }
+                else
+                {
+                    result.AppendFormat($"{fieldName}:{fieldValue}");
+                }
+                
                 result.AppendLine();
+
+
             }
         }
         return result.ToString();

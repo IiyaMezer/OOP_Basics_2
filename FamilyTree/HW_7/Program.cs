@@ -4,7 +4,9 @@
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello, World!");
+            TestClass testObj = new TestClass(1, "Hi", 3.0m, new char[] { 'A', 'B', 'C' });            
+
+            Console.WriteLine(Reflection.ObjectToString(testObj));
         }
     }
 }

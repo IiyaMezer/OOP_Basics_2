@@ -8,12 +8,13 @@ namespace HW_7;
 
 internal class TestClass
 {
-    [MyCustomName("CustomFieldName")]
+    [MyCustomName("Int")]
     public int I { get; set; }
-    [MyCustomName("CustomFieldName")]
+    [MyCustomName("string")]
     private string? S { get; set; }
-    [MyCustomName("CustomFieldName")]
+    [MyCustomName("decimal")]
     public decimal D { get; set; }
+    [MyCustomName("Char")]
     public char[]? C { get; set; }
 
     public TestClass()
