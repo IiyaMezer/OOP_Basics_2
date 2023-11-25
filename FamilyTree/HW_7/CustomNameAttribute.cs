@@ -7,13 +7,13 @@ using System.Threading.Tasks;
 namespace HW_7;
 
 [AttributeUsage(AttributeTargets.Property)]
-public class MyCustomNameAttribute:Attribute
+public class CustomNameAttribute:Attribute
 {
 
 
     public string FieldName { set; get; }
 
-    public MyCustomNameAttribute(string fieldName)
+    public CustomNameAttribute(string fieldName)
     {
         FieldName = fieldName;
     }

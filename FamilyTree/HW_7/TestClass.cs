@@ -6,15 +6,15 @@ using System.Threading.Tasks;
 
 namespace HW_7;
 
-internal class TestClass
+public class TestClass
 {
-    [MyCustomName("Int")]
+    [CustomName("Int")]
     public int I { get; set; }
-    [MyCustomName("string")]
+    [CustomName("string")]
     private string? S { get; set; }
-    [MyCustomName("decimal")]
+    [CustomName("decimal")]
     public decimal D { get; set; }
-    [MyCustomName("Char")]
+    [CustomName("Char")]
     public char[]? C { get; set; }
 
     public TestClass()

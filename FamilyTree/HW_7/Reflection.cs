@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Dynamic;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -11,16 +12,18 @@ public static class Reflection
 {
     public static string ObjectToString(object obj)
     {
-
         StringBuilder result = new StringBuilder();
         Type type = obj.GetType();
+        result.Append(type.AssemblyQualifiedName + ":");
+        result.Append(type.Name + ":");
+        result.AppendLine();
         var properties = type.GetProperties(System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public);
 
 
         foreach (var fieldInfo in properties)
 
         {
-            MyCustomNameAttribute attribute = fieldInfo.GetCustomAttribute<MyCustomNameAttribute>();
+            CustomNameAttribute attribute = fieldInfo.GetCustomAttribute<CustomNameAttribute>();
 
             if (attribute != null)
             {
@@ -29,13 +32,13 @@ public static class Reflection
 
                 if (fieldInfo.PropertyType == typeof(char[]))
                 {
-                    result.AppendFormat($"{fieldName}:{new String(fieldValue as char[]) + "|"}");
+                    result.AppendFormat($"{fieldName}:{new String(fieldValue as char[])}");
                 }
                 else
                 {
                     result.AppendFormat($"{fieldName}:{fieldValue}");
                 }
-                
+
                 result.AppendLine();
 
 
@@ -44,31 +47,49 @@ public static class Reflection
         return result.ToString();
     }
 
-    public static void StringToObject(string data , object obj)
+    public static object StringToObject(string data)
     {
-        string[] lines = data.Split(new[] {Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries);
 
-        foreach (string line in lines)
+        string[] lines = data.Split(new[] { Environment.NewLine }, StringSplitOptions.RemoveEmptyEntries);
+        var classAssemblyAndName = lines[0].Split(':');
+        var result = Activator.CreateInstance(null, classAssemblyAndName[1])?.Unwrap();
+        var type = result.GetType();
+        var properties = type.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+
+        for (int i=1; i < lines.Length-1; i++)
         {
-            string[] keyValue = line.Split(':');
-            string fieldName = keyValue[0].Trim();
-            string fieldValue = keyValue[1].Trim();
+            string[] keyValue = lines[i].Split(':');            
+            PropertyInfo fieldType = type.GetProperty(keyValue[0]);
+            string fieldValue = keyValue[1];
+            Console.WriteLine($"{fieldType}:{fieldValue}");
+            var property = properties.FirstOrDefault(type => GetFieldType(type) == keyValue[0]);
 
-            foreach(FieldInfo fieldInfo in obj.GetType().GetFields())
+            if (property.PropertyType == typeof(int))
             {
-                MyCustomNameAttribute attribute = fieldInfo.GetCustomAttribute<MyCustomNameAttribute> ();
-
-                if (attribute?.FieldName == fieldName)
-                {
-                    Type fieldType = fieldInfo.FieldType;
-                    object parsedValue = Convert.ChangeType(fieldValue, fieldType);
-
-                    fieldInfo.SetValue(obj, parsedValue);
-                    break;
-                }
-
+                fieldType.SetValue(result, int.Parse(fieldValue));
             }
+            if (property.PropertyType == typeof(string))
+            {
+                fieldType.SetValue(result, fieldValue);
+            }
+            if (property.PropertyType == typeof(decimal))
+            {
+                fieldType.SetValue(result, decimal.Parse(fieldValue));
+            }
+            if (property.PropertyType == typeof(char[]))
+            {
+                fieldType.SetValue(result, fieldValue.ToCharArray());
+            }
+
         }
+        return result;
+    }
+
+    private static string GetFieldType(PropertyInfo propertyInfo)
+    {
+        var attribute =(CustomNameAttribute) Attribute.GetCustomAttribute(propertyInfo, typeof(CustomNameAttribute));
+        return attribute !=null ? attribute.FieldName : propertyInfo.Name;
+
     }
 
 }
