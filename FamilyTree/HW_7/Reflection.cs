@@ -17,31 +17,17 @@ public static class Reflection
         foreach (FieldInfo fieldInfo in type.GetFields())
 
         {
-
             MyCustomNameAttribute attribute = fieldInfo.GetCustomAttribute<MyCustomNameAttribute>();
 
-
-
             if (attribute != null)
-
             {
-
                 string fieldName = attribute.FieldName;
-
                 object fieldValue = fieldInfo.GetValue(obj);
 
-
-
                 result.AppendFormat($"{fieldName}:{fieldValue}");
-
                 result.AppendLine();
-
             }
-
         }
-
-
-
         return result.ToString();
     }
 
