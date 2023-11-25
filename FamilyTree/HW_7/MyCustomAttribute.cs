@@ -11,7 +11,7 @@ public class MyCustomNameAttribute:Attribute
 {
 
 
-    public string FieldName { get;}
+    public string FieldName { set; get; }
 
     public MyCustomNameAttribute(string fieldName)
     {

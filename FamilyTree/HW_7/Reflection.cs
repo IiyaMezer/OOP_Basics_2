@@ -45,5 +45,31 @@ public static class Reflection
         return result.ToString();
     }
 
-    public static string StringToObject(object obj) { return null; }
+    public static void StringToObject(string data , object obj)
+    {
+        string[] lines = data.Split(new[] {Environment.NewLine}, StringSplitOptions.RemoveEmptyEntries);
+
+        foreach (string line in lines)
+        {
+            string[] keyValue = line.Split(':');
+            string fieldName = keyValue[0].Trim();
+            string fieldValue = keyValue[1].Trim();
+
+            foreach(FieldInfo fieldInfo in obj.GetType().GetFields())
+            {
+                MyCustomNameAttribute attribute = fieldInfo.GetCustomAttribute<MyCustomNameAttribute> ();
+
+                if (attribute?.FieldName == fieldName)
+                {
+                    Type fieldType = fieldInfo.FieldType;
+                    object parsedValue = Convert.ChangeType(fieldValue, fieldType);
+
+                    fieldInfo.SetValue(obj, parsedValue);
+                    break;
+                }
+
+            }
+        }
+    }
+
 }
