@@ -1,0 +1,47 @@
+[
+  {
+    "_id": "6569f5822c26321c685f6805",
+    "index": 0,
+    "guid": "fe75c8ad-e0c0-4326-9d9f-74ccf244d5d7",
+    "isActive": false,
+    "balance": "$2,291.03",
+    "picture": "http://placehold.it/32x32",
+    "age": 28,
+    "eyeColor": "blue",
+    "name": "Mavis Maxwell",
+    "gender": "female",
+    "company": "FURNAFIX",
+    "email": "mavismaxwell@furnafix.com",
+    "phone": "+1 (854) 554-2129",
+    "address": "725 Mermaid Avenue, Ruffin, South Dakota, 9761",
+    "about": "Voluptate esse voluptate minim magna aliquip velit cillum cillum occaecat cupidatat. Minim ipsum Lorem reprehenderit tempor et incididunt culpa irure eu cillum irure ipsum tempor id. Eiusmod dolor in sit voluptate aliquip proident. Aliqua quis ipsum qui ut ex cupidatat anim ea aute reprehenderit nostrud do. In ipsum labore aute aliqua ea nostrud. Laboris id consequat ad qui veniam Lorem aliquip veniam culpa incididunt minim id. Esse sint commodo in aliquip irure.\r\n",
+    "registered": "2017-05-17T03:39:23 -07:00",
+    "latitude": -89.534389,
+    "longitude": -36.110571,
+    "tags": [
+      "incididunt",
+      "et",
+      "magna",
+      "duis",
+      "nostrud",
+      "ipsum",
+      "laboris"
+    ],
+    "friends": [
+      {
+        "id": 0,
+        "name": "Karyn Lopez"
+      },
+      {
+        "id": 1,
+        "name": "Kris Morrison"
+      },
+      {
+        "id": 2,
+        "name": "Frazier Nixon"
+      }
+    ],
+    "greeting": "Hello, Mavis Maxwell! You have 6 unread messages.",
+    "favoriteFruit": "banana"
+  }
+]
