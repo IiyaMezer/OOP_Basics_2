@@ -50,6 +50,8 @@ class JsonXmlConverter
     private XmlDocument CreateXmlFromJson(string json)
     {
         XmlDocument xmlDoc = new XmlDocument();
+        XmlDeclaration xmlDeclaration = doc.CreateXmlDeclaration("1.0", "UTF-8", null);
+        xmlDoc.InsertBefore(xmlDeclaration, root);
         XmlElement root = xmlDoc.CreateElement("root");
         xmlDoc.AppendChild(root);
 
