@@ -6,19 +6,18 @@ namespace HW_9;
     {
         static void Main(string[] args)
         {
-		string jsonFilePath = "path";
-		string json = File.ReadAllText(jsonFilePath);
-		string outputXml = "output";
+        Convert converter = new();
+		string jsonFilePath = "C:\\Users\\carna\\Source\\Repos\\IiyaMezer\\OOP_Basics_2\\FamilyTree\\ConsoleApp1\\generated.json";
+		string outputXml = "C:\\Users\\carna\\Source\\Repos\\IiyaMezer\\OOP_Basics_2\\FamilyTree\\ConsoleApp1\\output.xml";
 		try
 		{
-			XmlDocument xmlDoc = Convert.JsonToXml(json);
-			Convert.SaveXmlToFile(xmlDoc, outputXml);
+            converter.JsonToXml(jsonFilePath, outputXml);
             Console.WriteLine("Convertation succes");
         }
 		catch (Exception ex)
 		{
 
-            Console.WriteLine($"Error: ");
+            Console.WriteLine($"Error: {ex}");
         }
         }
     }

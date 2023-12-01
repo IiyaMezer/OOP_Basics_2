@@ -8,19 +8,23 @@ using System.Xml;
 
 namespace HW_9;
 
+
 public class Convert
 {
-    /// <summary>
-    /// Конвертация json строки в xml 
-    /// </summary>
-    /// <param name="jsonSring">json as sring</param>
-    /// <returns>XML string</returns>
-    public static XmlDocument JsonToXml(string jsonSring)
+    public void JsonToXml(string jsonFilePath, string xmlFilePath)
+    {
+        string json = File.ReadAllText(jsonFilePath);
+        XmlDocument xmlDoc = Corvertation(json);
+        SaveXmlToFile(xmlDoc, xmlFilePath);
+    }
+
+    private XmlDocument Corvertation(string json)
     {
         XmlDocument xmlDoc = new XmlDocument();
         XmlElement root = xmlDoc.CreateElement("root");
         xmlDoc.AppendChild(root);
-        using(JsonDocument document = JsonDocument.Parse(jsonSring))
+
+        using (JsonDocument document = JsonDocument.Parse(json))
         {
             foreach (JsonProperty property in document.RootElement.EnumerateObject())
             {
@@ -53,7 +57,7 @@ public class Convert
         return element;
     }
 
-    public static void SaveXmlToFile(XmlDocument xmlDoc, string filePath)
+    private void SaveXmlToFile(XmlDocument xmlDoc, string filePath)
     {
         xmlDoc.Save(filePath);
     }
