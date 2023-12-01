@@ -2,12 +2,14 @@
 
 namespace HW_9;
 
-    internal class Program
+internal class Program
+{
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
-        {
         JsonXmlConverter converter = new();
-		string jsonFilePath = "C:\\Users\\carna\\Source\\Repos\\IiyaMezer\\OOP_Basics_2\\FamilyTree\\ConsoleApp1\\generated.json";
-		string outputXml = "C:\\Users\\carna\\Source\\Repos\\IiyaMezer\\OOP_Basics_2\\FamilyTree\\ConsoleApp1\\output.xml";
+        string jsonFilePath = "C:\\Users\\carna\\Source\\Repos\\IiyaMezer\\OOP_Basics_2\\FamilyTree\\ConsoleApp1\\generated.json";
+        string outputXml = "C:\\Users\\carna\\Source\\Repos\\IiyaMezer\\OOP_Basics_2\\FamilyTree\\ConsoleApp1\\output.xml";
 
-            converter.ConvertJsonToXml(jsonFilePath, outputXml);
+        converter.ConvertJsonToXml(jsonFilePath, outputXml);
+    }
+}
