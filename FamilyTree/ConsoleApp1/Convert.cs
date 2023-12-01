@@ -8,17 +8,46 @@ using System.Xml;
 
 namespace HW_9;
 
-
-public class Convert
+class JsonXmlConverter
 {
-    public void JsonToXml(string jsonFilePath, string xmlFilePath)
+    /// <summary>
+    /// Конвертация из json to xml
+    /// </summary>
+    /// <param name="jsonFilePath">json filepath</param>
+    /// <param name="xmlFilePath"> xml filepath</param>
+    public void ConvertJsonToXml(string jsonFilePath, string xmlFilePath)
     {
-        string json = File.ReadAllText(jsonFilePath);
-        XmlDocument xmlDoc = Corvertation(json);
-        SaveXmlToFile(xmlDoc, xmlFilePath);
+        try
+        {
+            string json = File.ReadAllText(jsonFilePath);
+            XmlDocument xmlDoc = CreateXmlFromJson(json);
+            SaveXmlToFile(xmlDoc, xmlFilePath);
+            Console.WriteLine("Преобразование JSON в XML выполнено успешно.");
+        }
+        catch (FileNotFoundException ex)
+        {
+            Console.WriteLine($"File not found: {ex.Message}");
+        }
+        catch (JsonException ex)
+        {
+            Console.WriteLine($"JSON error: {ex.Message}");
+        }
+        catch (XmlException ex)
+        {
+            Console.WriteLine($"XM error: {ex.Message}");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error: {ex.Message}");
+        }
     }
-
-    private XmlDocument Corvertation(string json)
+    /// <summary>
+    /// Преобразование json в XMLдокумент
+    /// и его наполнение поэлементно
+    /// </summary>
+    /// <param name="json">json as string</param>
+    /// <returns>Converted Xml </returns>
+    private XmlDocument CreateXmlFromJson(string json)
     {
         XmlDocument xmlDoc = new XmlDocument();
         XmlElement root = xmlDoc.CreateElement("root");
@@ -28,14 +57,22 @@ public class Convert
         {
             foreach (JsonProperty property in document.RootElement.EnumerateObject())
             {
-                XmlElement element = JsonToXmlProp(xmlDoc, property);
+                XmlElement element = XmlPropsFromJson(xmlDoc, property);
                 root.AppendChild(element);
             }
         }
+
         return xmlDoc;
     }
-
-    private XmlElement JsonToXmlProp(XmlDocument xmlDoc, JsonProperty property)
+    /// <summary>
+    /// Логика преобразования поллей из одного формата в другой
+    /// и заполнение документа
+    /// </summary>
+    /// <param name="xmlDoc"></param>
+    /// <param name="property"></param>
+    /// <returns>Элемент который записывается в файл</returns>
+    /// <exception cref="InvalidDataException"></exception>
+    private XmlElement XmlPropsFromJson(XmlDocument xmlDoc, JsonProperty property)
     {
         XmlElement element = xmlDoc.CreateElement(property.Name);
 
@@ -52,11 +89,16 @@ public class Convert
                 element.InnerText = property.Value.GetBoolean().ToString();
                 break;
             default:
-                throw new InvalidDataException("data error");
+                throw new InvalidDataException("Synthax JSON error");
         }
+
         return element;
     }
-
+    /// <summary>
+    /// Запись XML элемента в файл
+    /// </summary>
+    /// <param name="xmlDoc">записываемый документ</param>
+    /// <param name="filePath">путь к существующему файлу</param>
     private void SaveXmlToFile(XmlDocument xmlDoc, string filePath)
     {
         xmlDoc.Save(filePath);
